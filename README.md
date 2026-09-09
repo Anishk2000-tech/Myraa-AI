@@ -560,3 +560,74 @@ If you like SK SIGMA BOSS AI Assistant:
 ### Thank You For Supporting SK SIGMA BOSS AI Assistant 🚀
 
 </p>
+<div class="subscribe-box">
+  <h2>📨 Stay Updated</h2>
+
+  <p>
+    Subscribe to get news about SK SIGMA BOSS AI Assistant
+    updates and releases.
+  </p>
+
+  <form id="subscribeForm">
+    <input
+      type="email"
+      id="emailInput"
+      placeholder="Enter your email"
+      autocomplete="email"
+      required
+    />
+
+    <button type="submit" id="subscribeBtn">
+      Subscribe
+    </button>
+  </form>
+
+  <div id="subscribeMessage"></div>
+</div>
+
+<script>
+const form = document.getElementById("subscribeForm");
+const emailInput = document.getElementById("emailInput");
+const button = document.getElementById("subscribeBtn");
+const message = document.getElementById("subscribeMessage");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const email = emailInput.value.trim().toLowerCase();
+
+  // Email validation
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailPattern.test(email)) {
+    message.textContent = "❌ Please enter a valid email address.";
+    message.className = "error";
+    return;
+  }
+
+  // Check whether already subscribed
+  const subscribers =
+    JSON.parse(localStorage.getItem("skSigmaSubscribers")) || [];
+
+  if (subscribers.includes(email)) {
+    message.textContent = "ℹ️ This email is already subscribed.";
+    message.className = "info";
+    return;
+  }
+
+  // Save email
+  subscribers.push(email);
+  localStorage.setItem(
+    "skSigmaSubscribers",
+    JSON.stringify(subscribers)
+  );
+
+  // Success
+  message.textContent =
+    "✅ Successfully subscribed to SK SIGMA BOSS AI Assistant updates!";
+
+  message.className = "success";
+
+  emailInput.value = "";
+});
+</script>
